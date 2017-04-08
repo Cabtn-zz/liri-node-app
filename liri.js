@@ -82,10 +82,10 @@ function myMovie(liri, search){
                     console.log("Plot: " + data.plot);
                     console.log("Director: " + data.directors);
                     console.log("Actors: " + data.actors);
-                    console.log("IMDB Rating: " + data.ratings[0].Value);
-                    console.log("RT Rating: " + data.ratings[1].Value);
                     console.log("Language: " + data.languages);
                     console.log("Countries Filmed In: " + data.countries);
+                    console.log("IMDB Rating: " + data.ratings[0].Value);
+                    console.log("RT Rating: " + data.ratings[1].Value);
                     //incase a user has a movie title with spaces
                     search = search.split(' ').join('_');
                     console.log("RT URL: https://www.rottentomatoes.com/m/" + search)
