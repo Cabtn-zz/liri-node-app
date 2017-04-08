@@ -4,6 +4,7 @@
   "description": "",
   "main": "key.js",
   "dependencies": {
+    "fs": "0.0.1-security",
     "imdb": "^1.1.0",
     "oauth": "^0.9.15",
     "omdb": "^0.7.0",
