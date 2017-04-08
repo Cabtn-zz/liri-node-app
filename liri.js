@@ -62,11 +62,11 @@ function mySpotify(liri, songName){
         }
     else {
             console.log("===========================");
-            console.log("Songname " + songName);
-            console.log(data.tracks.items[0].album.name);
-            console.log(data.tracks.items[0].artists[0].name); 
-            console.log(data.tracks.items[0].name);
-            console.log(data.tracks.items[0].preview_url);
+            console.log("Songname: " + songName);
+            console.log("Album name: " + data.tracks.items[0].album.name);
+            console.log("Artists: " + data.tracks.items[0].artists[0].name); 
+            // console.log(data.tracks.items[0].name);
+            console.log("URL: " + data.tracks.items[0].preview_url);
             console.log("===========================");
         }
     });
