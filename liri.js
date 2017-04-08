@@ -4,8 +4,12 @@ var fs = require("fs");
 
 var twitterPackage = require("twitter");
 var spotify = require("spotify");
-var omdb = require('omdb');
-var imdb = require('imdb');
+
+// import
+var APIClinet = require('omdb-api-client');
+
+// instantiate
+var omdb = new APIClinet();
 
 //This inputs the key into the twitter API
 var twitter = twitterPackage(key)
@@ -18,7 +22,7 @@ var client = new twitterPackage({
   access_token_key: '65854240-dh2EXWRtpi8LFgbmocLSF0p6RT7Mq712YNl2fkRBv',
   access_token_secret: 'KSHjmp0aLWM1GgkLGEVPLtb9AjdcnfFRhpoWReaYPKXE5',
 });
-
+//this is what runs everything
 function runLiri(liri) {
     if (liri ==="my-tweets"){
         myTweets(liri);
@@ -69,44 +73,34 @@ function mySpotify(liri, songName){
 }
 
 function myMovie(liri, search){
-    //checks to see if a search input was made
-    if (search === true){
-        //first searchs the omdb database to get the IMDB search tag
-        omdb.search(search, function(err, movies) {
-            if(err) {
-                return console.error(err);
-            }
-            //if nothing is found under the search
-            if(movies.length < 1) {
-                console.log("===========================");
-                console.log("If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947/");
-                console.log("It's on Netflix");
-                console.log("===========================");
-            }
-
-            else {
-                //console.log(movies[0]);
-                imdb(movies[0].imdb, function(err, data) {
-                    //console.log(data);
-                    console.log("===========================");
+    if (process.argv[3]) {
+    //if the user inputs a search
+        omdb({t:search}).list().then(function(data) {
+                    console.log("=========================== Movies =====================");
                     console.log("Title: " + data.title);
-                    console.log("Rating: " + data.rating);
-                    //console.log("Language: " + data.language;
-                    console.log("Plot: " + data.description);
-                    console.log("Director: " + data.director);
-                    console.log("===========================");
-                });
-            }
+                    console.log("Year Released: " + data.year);
+                    console.log("Plot: " + data.plot);
+                    console.log("Director: " + data.directors);
+                    console.log("Actors: " + data.actors);
+                    console.log("IMDB Rating: " + data.ratings[0].Value);
+                    console.log("RT Rating: " + data.ratings[1].Value);
+                    console.log("Language: " + data.languages);
+                    console.log("Countries Filmed In: " + data.countries);
+                    //incase a user has a movie title with spaces
+                    search = search.split(' ').join('_');
+                    console.log("RT URL: https://www.rottentomatoes.com/m/" + search)
+                    console.log("========================================================");
         });
     }
-
+    //default if no response
     else {
         console.log("===========================");
         console.log("If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947/");
         console.log("It's on Netflix");
         console.log("===========================");
     }
-} 
+}
+
 function readRandom() {
 //This reads the random.txt file and seprates it into an array
     fs.readFile("random.txt", "utf-8", function(error, data) {
