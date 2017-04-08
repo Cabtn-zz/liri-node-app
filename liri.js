@@ -1,7 +1,7 @@
 //This is where I have my twitter credentials
 var key = require("./key");
 var fs = require("fs");
-
+console.log(key.twitterKeys);
 var twitterPackage = require("twitter");
 var spotify = require("spotify");
 
@@ -15,13 +15,9 @@ var omdb = new APIClinet();
 var twitter = twitterPackage(key)
 
 var liri = process.argv[2];
-//FIX this variable so you don't have the key here
-var client = new twitterPackage({
-  consumer_key: 'hPxpkhaGWrdEyixrPO9l6oskc',
-  consumer_secret: 'o9EfrFuebPQ8FRDvV8I8hao6CNFUbFmiqOH7UAmSs0yZ13x7nH',
-  access_token_key: '65854240-dh2EXWRtpi8LFgbmocLSF0p6RT7Mq712YNl2fkRBv',
-  access_token_secret: 'KSHjmp0aLWM1GgkLGEVPLtb9AjdcnfFRhpoWReaYPKXE5',
-});
+
+
+var client = new twitterPackage(key.twitterKeys)
 //this is what runs everything
 function runLiri(liri) {
     if (liri ==="my-tweets"){
