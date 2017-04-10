@@ -1,7 +1,7 @@
 //This is where I have my twitter credentials
 var key = require("./key");
 var fs = require("fs");
-console.log(key.twitterKeys);
+
 var twitterPackage = require("twitter");
 var spotify = require("spotify");
 
